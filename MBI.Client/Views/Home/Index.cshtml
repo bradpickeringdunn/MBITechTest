@@ -1,0 +1,35 @@
+﻿@model MBI.Client.Models.Calculator.CalculatorModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Enter in a prime number and see a list of the prime's that preceede it.</h1>
+    <div>
+        @using (Html.BeginForm("CalculatePrimes", "Home", FormMethod.Post))
+        {
+            <div>
+                @Html.TextBoxFor(i => i.PrimeNumber, new { @class = "form+control", @type = "number", placeholder = 7 })
+            </div>
+
+            <button class="button" type="submit">Calculate Primes</button>
+
+            <div>
+                @if (!String.IsNullOrEmpty(Model.ErrorMessage)) 
+                {
+                    <p>@Model.ErrorMessage</p>
+                }
+            </div>
+
+            @if (Model.PrimeNumbers.Count > 0)
+            {
+                <ul>
+                    @foreach(var number in Model.PrimeNumbers)
+                    {
+                        <li>@number</li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
